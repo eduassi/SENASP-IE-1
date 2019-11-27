@@ -16,23 +16,20 @@
             "url": "pages/capitulo_0.html"
         },
         {
-            "placeholder": "Aula 1",
+            "placeholder": "Gride",
             "url": "pages/capitulo_1.html"
         },
         {
-            "placeholder": "Aula 2",
+            "placeholder": "Componentes",
             "url": "pages/capitulo_2.html"
         },
         {
-            "placeholder": "Aula 3",
+            "placeholder": "Jogos",
             "url": "pages/capitulo_3.html"
         },
         {
-            "placeholder": "Aula 4",
+            "placeholder": "Animações",
             "url": "pages/capitulo_4.html"
-        } {
-            "placeholder": "Referências",
-            "url": "pages/capitulo_5.html"
         }
     ]
 }
