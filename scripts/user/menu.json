@@ -34,6 +34,14 @@
         {
             "placeholder": "Aula 5",
             "url": "pages/capitulo_5.html"
+        },
+        {
+            "placeholder": "Atividade",
+            "url": "pages/capitulo_6.html"
+        },
+        {
+            "placeholder": "Referências",
+            "url": "pages/capitulo_7.html"
         }
     ]
 }
