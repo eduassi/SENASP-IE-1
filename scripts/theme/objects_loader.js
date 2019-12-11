@@ -55,7 +55,7 @@ class APS_Element {
 
     play() {
         let self = this;
-        return new Promise(async function (resolve, reject) {
+        return new Promise(async function(resolve, reject) {
             switch (self.flags["animation-style"]) {
                 case "moveline":
                     resolve();
@@ -76,7 +76,7 @@ class APS_Element {
             for (var next_frame_number = 0; next_frame_number < self.frames.length; next_frame_number++) {
                 next_frame = self.frames[next_frame_number];
                 next_frame_duration = Number($(next_frame).attr("frame-duration"));
-                try { $(actual_frame).hide() } catch (e) { };
+                try { $(actual_frame).hide() } catch (e) {};
                 $(next_frame).show();
                 await sleep(next_frame_duration);
                 actual_frame = next_frame;
@@ -86,7 +86,7 @@ class APS_Element {
                 for (var next_frame_number = self.frames.length - 2; next_frame_number >= 0; next_frame_number--) {
                     next_frame = self.frames[next_frame_number];
                     next_frame_duration = Number($(next_frame).attr("frame-duration"));
-                    try { $(actual_frame).hide() } catch (e) { };
+                    try { $(actual_frame).hide() } catch (e) {};
                     $(next_frame).show();
                     await sleep(next_frame_duration);
                     actual_frame = next_frame;
@@ -99,22 +99,22 @@ class APS_Element {
 }
 
 // GLOBAL FUNCTIONS
-var sleep = function (ms) {
+var sleep = function(ms) {
     return new Promise(resolve => setTimeout(resolve, ms));
 }
 
-var set_same_height_collection = function (collection) {
+var set_same_height_collection = function(collection) {
     let new_height = 0;
-    $.each($(collection), function (index, object) {
+    $.each($(collection), function(index, object) {
         let temp_height = $(object).outerHeight();
         new_height = temp_height > new_height ? temp_height : new_height;
     });
-    $.each($(collection), function (index, object) {
+    $.each($(collection), function(index, object) {
         $(object).height(new_height);
     });
 }
 
-var set_static_size = function (text_items, text_box) {
+var set_static_size = function(text_items, text_box) {
     let min_height = 0;
     for (let i = 0; i < text_items.length - 1; i++) {
         let item_h = $(text_items[i]).outerHeight();
@@ -125,38 +125,38 @@ var set_static_size = function (text_items, text_box) {
     text_box.css("min-height", min_height)
 }
 
-var change_scroll_position_by_top_object = function (element, offset_top, margin_top) {
+var change_scroll_position_by_top_object = function(element, offset_top, margin_top) {
     let y_scroll_position = $(element).offset().top - offset_top - margin_top;
     window.scrollTo(0, y_scroll_position);
 }
 
 
-var refresh_objects_listeners = function () {
+var refresh_objects_listeners = function() {
 
     //SETUP
     var aps = new APS();
 
     //ALMOST PIXAR STUDIO - ANIMATOR
-    $.each($(".aps-animator"), function (index, element) {
+    $.each($(".aps-animator"), function(index, element) {
         let identifier = $(element).attr("id");
         var element = new APS_Element("#" + identifier);
         aps.include_aps(identifier, element);
     });
 
     //ACCORDION LOADER
-    $.each($(".accordion"), function (index, element) {
+    $.each($(".accordion"), function(index, element) {
         let margin_top = $($(".card-header")[0]).height();
         let offset_top = $(".navbar").height();
         let tabs = $(this).find(".card");
         let thread_var;
         let current_tab;
-        $(".card").on('show.bs.collapse', function () {
+        $(".card").on('show.bs.collapse', function() {
             current_tab = this;
-            try { clearInterval(thread_var); } catch (e) { };
+            try { clearInterval(thread_var); } catch (e) {};
             thread_var = setInterval(() => {
                 change_scroll_position_by_top_object(current_tab, offset_top, margin_top);
             }, 1);
-        }).on('shown.bs.collapse', function () {
+        }).on('shown.bs.collapse', function() {
             clearInterval(thread_var);
             change_scroll_position_by_top_object(current_tab, offset_top, margin_top);
         });
@@ -164,7 +164,7 @@ var refresh_objects_listeners = function () {
 
 
     //VENTANITA LOADER
-    $.each($(".ventanita"), function (index, element) {
+    $.each($(".ventanita"), function(index, element) {
         let text_box = $(this).find("#ventanita-objects");
         let text_items = $(text_box).children();
         let active_button = null;
@@ -172,11 +172,11 @@ var refresh_objects_listeners = function () {
         let button_collection = $(this).find(".ventanita-show");
 
         set_same_height_collection(text_items);
-        $.each(button_collection, function (default_index, button) {
+        $.each(button_collection, function(default_index, button) {
             let target_id = "#" + button.getAttribute("data-turnon");
             let default_id = text_items[default_index + 1];
             let target_screen_object = target_id != "#null" ? $(text_box).find(target_id) : $(default_id);
-            $(button).on("click", function () {
+            $(button).on("click", function() {
                 $(active_button).removeClass("active");
                 $(active_text_box).removeClass("active");
 
@@ -190,7 +190,7 @@ var refresh_objects_listeners = function () {
     });
 
     //VENTANITA PIN MARKER LOADER
-    $.each($(".ventanitas_pin_marker"), function (index, element) {
+    $.each($(".ventanitas_pin_marker"), function(index, element) {
         let text_box = $(this).find("#ventanita-objects");
         let text_items = $(text_box).children();
         let active_button = null;
@@ -203,11 +203,11 @@ var refresh_objects_listeners = function () {
         $(pin_marker).css('top', 0);
         $(pin_marker).css('left', 0);
         set_same_height_collection($(this).find(".ventana"));
-        $.each(button_collection, function (default_index, button) {
+        $.each(button_collection, function(default_index, button) {
             let target_id = "#" + button.getAttribute("data-turnon");
             let default_id = text_items[default_index + 1];
             let target_screen_object = target_id != "#null" ? $(text_box).find(target_id) : $(default_id);
-            $(button).on("click", function () {
+            $(button).on("click", function() {
                 $(pin_marker).show();
                 let this_position = $(this).position();
                 let pin_left = (this_position["left"] - pin_half_width);
@@ -229,7 +229,7 @@ var refresh_objects_listeners = function () {
 
 
     //CIRCLE SLIDER
-    $.each($(".circle_slider"), function (index, element) {
+    $.each($(".circle_slider"), function(index, element) {
         let i = 2;
         var radius = 200;
         var fields = $($(element).find('.itemDot'));
@@ -238,8 +238,9 @@ var refresh_objects_listeners = function () {
         radius = width / 2;
 
         var height = container.height();
-        var angle = 0, step = (2 * Math.PI) / fields.length;
-        fields.each(function () {
+        var angle = 0,
+            step = (2 * Math.PI) / fields.length;
+        fields.each(function() {
             var x = Math.round(width / 2 + radius * Math.cos(angle) - $(this).width() / 2);
             var y = Math.round(height / 2 + radius * Math.sin(angle) - $(this).height() / 2);
             $(this).css({
@@ -250,7 +251,7 @@ var refresh_objects_listeners = function () {
         });
 
 
-        $($(element).find('.itemDot')).click(function () {
+        $($(element).find('.itemDot')).click(function() {
             var dataTab = $(this).data("tab");
             fields.removeClass('active');
             $(this).addClass('active');
@@ -272,88 +273,88 @@ var refresh_objects_listeners = function () {
 
 
 
-	//Image comparison
+    //Image comparison
 
- 
-  
-  function drags(dragElement, resizeElement, container) {
-      
-    // Initialize the dragging event on mousedown.
-    dragElement.on('mousedown touchstart', function(e) {
-      
-      dragElement.addClass('draggable');
-      resizeElement.addClass('resizable');
-      
-      // Check if it's a mouse or touch event and pass along the correct value
-      var startX = (e.pageX) ? e.pageX : e.originalEvent.touches[0].pageX;
-      
-      // Get the initial position
-      var dragWidth = dragElement.outerWidth(),
-          posX = dragElement.offset().left + dragWidth - startX,
-          containerOffset = container.offset().left,
-          containerWidth = container.outerWidth();
-   
-      // Set limits
-      minLeft = containerOffset + 10;
-      maxLeft = containerOffset + containerWidth - dragWidth - 10;
-      
-      // Calculate the dragging distance on mousemove.
-      dragElement.parents().on("mousemove touchmove", function(e) {
-          
-        // Check if it's a mouse or touch event and pass along the correct value
-        var moveX = (e.pageX) ? e.pageX : e.originalEvent.touches[0].pageX;
-        
-        leftValue = moveX + posX - dragWidth;
-        
-        // Prevent going off limits
-        if ( leftValue < minLeft) {
-          leftValue = minLeft;
-        } else if (leftValue > maxLeft) {
-          leftValue = maxLeft;
-        }
-        
-        // Translate the handle's left value to masked divs width.
-        widthValue = (leftValue + dragWidth/2 - containerOffset)*100/containerWidth+'%';
-              
-        // Set the new values for the slider and the handle. 
-        // Bind mouseup events to stop dragging.
-        $('.draggable').css('left', widthValue).on('mouseup touchend touchcancel', function () {
-          $(this).removeClass('draggable');
-          resizeElement.removeClass('resizable');
+
+
+    function drags(dragElement, resizeElement, container) {
+
+        // Initialize the dragging event on mousedown.
+        dragElement.on('mousedown touchstart', function(e) {
+
+            dragElement.addClass('draggable');
+            resizeElement.addClass('resizable');
+
+            // Check if it's a mouse or touch event and pass along the correct value
+            var startX = (e.pageX) ? e.pageX : e.originalEvent.touches[0].pageX;
+
+            // Get the initial position
+            var dragWidth = dragElement.outerWidth(),
+                posX = dragElement.offset().left + dragWidth - startX,
+                containerOffset = container.offset().left,
+                containerWidth = container.outerWidth();
+
+            // Set limits
+            minLeft = containerOffset + 10;
+            maxLeft = containerOffset + containerWidth - dragWidth - 10;
+
+            // Calculate the dragging distance on mousemove.
+            dragElement.parents().on("mousemove touchmove", function(e) {
+
+                // Check if it's a mouse or touch event and pass along the correct value
+                var moveX = (e.pageX) ? e.pageX : e.originalEvent.touches[0].pageX;
+
+                leftValue = moveX + posX - dragWidth;
+
+                // Prevent going off limits
+                if (leftValue < minLeft) {
+                    leftValue = minLeft;
+                } else if (leftValue > maxLeft) {
+                    leftValue = maxLeft;
+                }
+
+                // Translate the handle's left value to masked divs width.
+                widthValue = (leftValue + dragWidth / 2 - containerOffset) * 100 / containerWidth + '%';
+
+                // Set the new values for the slider and the handle. 
+                // Bind mouseup events to stop dragging.
+                $('.draggable').css('left', widthValue).on('mouseup touchend touchcancel', function() {
+                    $(this).removeClass('draggable');
+                    resizeElement.removeClass('resizable');
+                });
+                $('.resizable').css('width', widthValue);
+            }).on('mouseup touchend touchcancel', function() {
+                dragElement.removeClass('draggable');
+                resizeElement.removeClass('resizable');
+            });
+            e.preventDefault();
+        }).on('mouseup touchend touchcancel', function(e) {
+            dragElement.removeClass('draggable');
+            resizeElement.removeClass('resizable');
         });
-        $('.resizable').css('width', widthValue);
-      }).on('mouseup touchend touchcancel', function(){
-        dragElement.removeClass('draggable');
-        resizeElement.removeClass('resizable');
-      });
-      e.preventDefault();
-    }).on('mouseup touchend touchcancel', function(e){
-      dragElement.removeClass('draggable');
-      resizeElement.removeClass('resizable');
+    }
+
+
+    // Call & init
+
+    $('.ba-slider').each(function() {
+        var cur = $(this);
+        // Adjust the slider
+        var width = cur.width() + 'px';
+        cur.find('.resize img').css('width', width);
+        // Bind dragging events
+        drags(cur.find('.handle'), cur.find('.resize'), cur);
     });
-  }
 
 
-  // Call & init
+    // Update sliders on resize. 
+    // Because we all do this: i.imgur.com/YkbaV.gif
 
-  $('.ba-slider').each(function(){
-    var cur = $(this);
-    // Adjust the slider
-    var width = cur.width()+'px';
-    cur.find('.resize img').css('width', width);
-    // Bind dragging events
-    drags(cur.find('.handle'), cur.find('.resize'), cur);
-  });
-
-
-// Update sliders on resize. 
-// Because we all do this: i.imgur.com/YkbaV.gif
-
-  $('.ba-slider').each(function(){
-    var cur = $(this);
-    var width = cur.width()+'px';
-    cur.find('.resize img').css('width', width);
-  });
+    $('.ba-slider').each(function() {
+        var cur = $(this);
+        var width = cur.width() + 'px';
+        cur.find('.resize img').css('width', width);
+    });
     // ./comparison
 
 
@@ -390,7 +391,7 @@ var refresh_objects_listeners = function () {
 
 
 
-    $.each($(".progress-bar-container"), function (index, element) {
+    $.each($(".progress-bar-container"), function(index, element) {
         let current = 0;
         let next_bt = $(this).find(".progress-next");
         let prev_bt = $(this).find(".progress-prev");
@@ -404,13 +405,13 @@ var refresh_objects_listeners = function () {
 
 
 
-        next_bt.on("click", function () {
+        next_bt.on("click", function() {
             if (current < max_len - 1) {
                 current = refresh_bar(text_items, bar, current, quantum, 1);
             }
         });
 
-        prev_bt.on("click", function () {
+        prev_bt.on("click", function() {
             if (current > 0) {
                 current = refresh_bar(text_items, bar, current, quantum, -1);
             }
@@ -418,7 +419,7 @@ var refresh_objects_listeners = function () {
     });
 
     // SPLIT CAROUSEL
-    $.each($(".split_carousel"), function (index, element) {
+    $.each($(".split_carousel"), function(index, element) {
         let active_button;
         let current = 0;
         let buttons = $(this).find(".split_button");
@@ -427,8 +428,8 @@ var refresh_objects_listeners = function () {
         set_same_height_collection(text_items);
 
         for (let i = 0; i < buttons.length; i++) {
-            $(buttons[i]).on("click", function () {
-                try { active_button.removeClass("active") } catch (e) { }
+            $(buttons[i]).on("click", function() {
+                try { active_button.removeClass("active") } catch (e) {}
                 active_button = $(this);
                 $(this).addClass("active");
                 $(text_items[current]).addClass("not-active");
@@ -439,7 +440,7 @@ var refresh_objects_listeners = function () {
     });
 
     // SPLIT CAROUSEL PIN MARKER
-    $.each($(".split_carousel_pin_marker"), function (index, element) {
+    $.each($(".split_carousel_pin_marker"), function(index, element) {
         let active_button;
         let current = 0;
         let buttons = $(this).find(".split_button");
@@ -453,8 +454,8 @@ var refresh_objects_listeners = function () {
 
         set_same_height_collection($(this).find(".text-item"));
 
-        $.each(buttons, function (index_bt, button) {
-            $(button).on("click", function () {
+        $.each(buttons, function(index_bt, button) {
+            $(button).on("click", function() {
                 $(pin_marker).show();
                 let container_cordinates = $(this).parent().position();
                 let var_TW = $(this).parent().outerWidth();
@@ -467,7 +468,7 @@ var refresh_objects_listeners = function () {
                 $(pin_marker).css('top', pin_top);
                 $(pin_marker).css('left', pin_left);
 
-                try { active_button.removeClass("active") } catch (e) { }
+                try { active_button.removeClass("active") } catch (e) {}
                 active_button = $(this);
                 $(this).addClass("active");
                 $(text_items[current]).addClass("not-active");
@@ -478,7 +479,7 @@ var refresh_objects_listeners = function () {
     });
 
     // JESUS SLIDER
-    $.each($(".jesus_slider"), function (index, element) {
+    $.each($(".jesus_slider"), function(index, element) {
         let current = 0;
         let back_buttons = $(this).find(".back_arrow");
         let forward_buttons = $(this).find(".forward_arrow");
@@ -489,7 +490,7 @@ var refresh_objects_listeners = function () {
 
         set_same_height_collection(text_items);
 
-        forward_buttons.on("click", function () {
+        forward_buttons.on("click", function() {
             if (current < ball_items.length) {
                 let margin_offset = parseInt(jesus_head.css("margin-left")) - item_width - 32;
                 margin_offset += "px";
@@ -503,7 +504,7 @@ var refresh_objects_listeners = function () {
                 $(text_items[current]).addClass("active");
             }
         });
-        back_buttons.on("click", function () {
+        back_buttons.on("click", function() {
             if (current > 0) {
                 let margin_offset = parseInt(jesus_head.css("margin-left")) + item_width + 32;
                 margin_offset += "px";
@@ -520,7 +521,7 @@ var refresh_objects_listeners = function () {
     });
 
     // JESUS SLIDER BALL
-    $.each($(".jesus_slider_ball"), function (index, element) {
+    $.each($(".jesus_slider_ball"), function(index, element) {
         let current = 0;
         let buttons = $(this).find(".slide_ball");
         let ball_items = $(this).find(".jesus-set");
@@ -530,9 +531,9 @@ var refresh_objects_listeners = function () {
 
         set_same_height_collection(text_items);
 
-        buttons.each(function (index) {
+        buttons.each(function(index) {
             let this_button = $(buttons[index]);
-            this_button.on("click", function () {
+            this_button.on("click", function() {
                 let difference = current - index;
                 let margin_offset = parseInt(jesus_head.css("margin-left")) + (item_width * difference) + (32 * difference);
                 margin_offset += "px";
@@ -550,7 +551,7 @@ var refresh_objects_listeners = function () {
     });
 
     // JESUS SLIDER NO ARROW
-    $.each($(".jesus_slider_no_arrow"), function (index, element) {
+    $.each($(".jesus_slider_no_arrow"), function(index, element) {
         let current = 0;
         let buttons = $(this).find(".slide_ball");
         let ball_items = $(this).find(".jesus-set");
@@ -560,9 +561,9 @@ var refresh_objects_listeners = function () {
 
         set_same_height_collection(text_items);
 
-        buttons.each(function (index) {
+        buttons.each(function(index) {
             let this_button = $(buttons[index]);
-            this_button.on("click", function () {
+            this_button.on("click", function() {
                 let difference = current - index;
                 let margin_offset = parseInt(jesus_head.css("margin-left")) + (item_width * difference) + (32 * difference);
                 margin_offset += "px";
@@ -580,7 +581,7 @@ var refresh_objects_listeners = function () {
     });
 
     // JESUS SLIDER NO ARROW IMAGE BACKGROUND
-    $.each($(".jesus_slider_no_arrow_image_background"), function (index, element) {
+    $.each($(".jesus_slider_no_arrow_image_background"), function(index, element) {
         let current = 0;
         let buttons = $(this).find(".slide_ball");
         let ball_items = $(this).find(".jesus-set");
@@ -590,9 +591,9 @@ var refresh_objects_listeners = function () {
 
         set_same_height_collection(text_items);
 
-        buttons.each(function (index) {
+        buttons.each(function(index) {
             let this_button = $(buttons[index]);
-            this_button.on("click", function () {
+            this_button.on("click", function() {
                 let difference = current - index;
                 let margin_offset = parseInt(jesus_head.css("margin-left")) + (item_width * difference) + (32 * difference);
                 margin_offset += "px";
@@ -610,12 +611,12 @@ var refresh_objects_listeners = function () {
     });
 
     // SPLIT CAROUSEL IMG
-    $.each($(".split_carousel_img"), function (index, element) {
+    $.each($(".split_carousel_img"), function(index, element) {
         let current = 0;
         let buttons = $(this).find(".split_button");
         let text_items = $(this).find(".text-item");
         set_same_height_collection(text_items);
-        $(buttons).on("click", function () {
+        $(buttons).on("click", function() {
             $(text_items[current]).addClass("not-active");
             current = $(this).attr("target-index");
             $(text_items[current]).removeClass("not-active");
@@ -623,18 +624,18 @@ var refresh_objects_listeners = function () {
     });
 
     // CAROUSEL
-    $.each($(".carousel"), function (index, element) {
+    $.each($(".carousel"), function(index, element) {
         let text_items = $(this).find(".carousel-item");
         set_same_height_collection(text_items);
     });
 
     // FLIPSTER FLAT SLIDER
-    $.each($(".flipster_slider"), function (index, element) {
+    $.each($(".flipster_slider"), function(index, element) {
         let current = 0;
         let flipster_items = $(this).find(".flipster-set");
         let flipster_head = $(this).find(".flipster-head");
         let item_width = $($(this).find(".flipster-set")[0]).width();
-        flipster_items.on("click", function () {
+        flipster_items.on("click", function() {
             let order = $(this).attr("order");
             let jump_offset = order - current;
             let margin_offset;
@@ -654,7 +655,7 @@ var refresh_objects_listeners = function () {
     });
 
     // FLIPSTER CAROUSEL SLIDER
-    $.each($(".flipster_carousel_slider"), function (index, element) {
+    $.each($(".flipster_carousel_slider"), function(index, element) {
         let current = 0;
         let current_fog = $(this).find(".flipster_carousel-head").find(".fog");
         let flipster_items = $(this).find(".flipster_carousel-set");
@@ -663,12 +664,12 @@ var refresh_objects_listeners = function () {
         let item_width = $($(this).find(".flipster_carousel-set")[0]).width();
         let margin_rate = item_width - item_width * 0.7;
 
-        $.each(flipster_items, function (index) {
+        $.each(flipster_items, function(index) {
             let new_z = flipster_len - index;
             $(this).css("zIndex", new_z);
         });
 
-        flipster_items.on("click", function (event) {
+        flipster_items.on("click", function(event) {
             let order = $(this).attr("order");
             if (current != order) {
                 current_fog.show();
@@ -712,7 +713,7 @@ var refresh_objects_listeners = function () {
     });
 
     // FLIP CARD
-    $(".flip-card").on("click", function () {
+    $(".flip-card").on("click", function() {
         if ($(this).hasClass("rotate")) {
             $(this).removeClass("rotate");
         } else {
@@ -721,7 +722,7 @@ var refresh_objects_listeners = function () {
     });
 
     // SPLIT LIST
-    $.each($(".split-list"), function () {
+    $.each($(".split-list"), function() {
         let button_set = $(this).find(".btn-ret").children();
         let text_set = $(this).find(".sl-txt");
         let current_active_button = $(button_set[0]);
@@ -729,8 +730,8 @@ var refresh_objects_listeners = function () {
 
         // INITIALIZATION
         // current_active.addClass("active");
-        $.each(button_set, function (index) {
-            $(this).on("click", function () {
+        $.each(button_set, function(index) {
+            $(this).on("click", function() {
                 current_active_button.removeClass("active");
                 current_active_text.hide();
                 current_active_button = $(this);
@@ -743,7 +744,7 @@ var refresh_objects_listeners = function () {
 
 
     // MATCHUP
-    $.each($(".matchup"), function (index, element) {
+    $.each($(".matchup"), function(index, element) {
         let open_cards = [];
         let freeze_time = false;
 
@@ -769,11 +770,11 @@ var refresh_objects_listeners = function () {
             '<div class="matchup-card" ' + dimensions_string + '>\
                 <div class="flip-card-container">\
                     <div class="flip-card matchup-card-active" position="unset">\
-                        <div class="flip-card-inner" '+ dimensions_string + '>\
+                        <div class="flip-card-inner" ' + dimensions_string + '>\
                             <div class="matchup-card-front flip-card-front" >\
                                 <img class="logo-fundo" src="assets/images/identity/logos/marca.png">\
                             </div>\
-                            <div class="matchup-card-back flip-card-back" '+ dimensions_string + '>\
+                            <div class="matchup-card-back flip-card-back" ' + dimensions_string + '>\
                                 <img class="matchup-card-content" src="" draggable="false">\
                                 <div class="frame">\
                                     <div class="molding">\
@@ -788,7 +789,7 @@ var refresh_objects_listeners = function () {
 
         $(raw_cards).remove();
 
-        $.each(raw_json["cards"], function (index, element) {
+        $.each(raw_json["cards"], function(index, element) {
             element[0]["id"] = id;
             cards.push(element[0]);
             if (element[1]) {
@@ -812,7 +813,7 @@ var refresh_objects_listeners = function () {
             }
         }
 
-        $(this).find(".matchup-card-active").on("click", function (e) {
+        $(this).find(".matchup-card-active").on("click", function(e) {
             if (!freeze_time) {
                 if (!$(this).hasClass("rotate")) {
                     $(this).addClass("rotate");
@@ -825,21 +826,21 @@ var refresh_objects_listeners = function () {
                         let isCrush = (cards[index_first_card]["id"] == cards[index_last_card]["id"]);
 
                         if (!isCrush) {
-                            setTimeout(function () {
+                            setTimeout(function() {
                                 open_cards[0].removeClass("rotate");
                                 open_cards[1].removeClass("rotate");
                                 open_cards = [];
-                                setTimeout(function () {
+                                setTimeout(function() {
                                     freeze_time = false;
                                 }, 200);
                             }, 1000);
                         } else {
                             let temporary_cards = open_cards;
                             open_cards = [];
-                            setTimeout(function () {
+                            setTimeout(function() {
                                 freeze_time = false;
                             }, 200);
-                            setTimeout(function () {
+                            setTimeout(function() {
                                 temporary_cards[0].removeClass("matchup-card-active");
                                 temporary_cards[1].removeClass("matchup-card-active");
                             }, 600)
@@ -869,7 +870,7 @@ var refresh_objects_listeners = function () {
         $(actualtarget).attr("actual-cell", "");
     }
 
-    $.each($(".puzzle"), function (index, element) {
+    $.each($(".puzzle"), function(index, element) {
         let switch_settings = (window.innerWidth > 480) ? "settings" : "mobile_settings";
         let puzzle_cont = $(this).find(".puzzle_container");
         let raw_puzzle = $(this).find("#puzzle_json");
@@ -920,17 +921,17 @@ var refresh_objects_listeners = function () {
                 $(new_piece).css('background-position', position_bg);
                 $(new_piece).draggable({
 
-                    start_handler: function (vector) {
+                    start_handler: function(vector) {
                         pre_drag_cell = $(vector).attr("actual-cell");
                         $(vector).css('zIndex', 2);
                         try {
                             false_counter += result[pre_drag_cell]["status"];
                             result[pre_drag_cell]["status"] = false
-                        } catch (e) { };
+                        } catch (e) {};
                     },
 
                     droptarget: '.puzzle-dropping',
-                    drop: function (evt, droptarget) {
+                    drop: function(evt, droptarget) {
                         let hand_piece_result = false;
                         let swapped_piece_result = false;
                         let former_boolean = false;
@@ -994,7 +995,7 @@ var refresh_objects_listeners = function () {
     });
 
     //QUIZ
-    $.each($(".quiz"), function (index, element) {
+    $.each($(".quiz"), function(index, element) {
         let start_menu_screen = $(this).find(".start-menu-screen");
         let game_screen = $(this).find(".game-screen");
         let gender_choice = $(".moldura");
@@ -1004,7 +1005,7 @@ var refresh_objects_listeners = function () {
         let width_avatar;
         let center_left;
 
-        $(gender_choice).on("click", function () {
+        $(gender_choice).on("click", function() {
             let gender = $(this).attr('mob');
             $(avatar).addClass(gender);
             $(start_menu_screen).hide();
@@ -1019,6 +1020,43 @@ var refresh_objects_listeners = function () {
         })
     });
 
+
+    //LUPA
+    $.each($(".zoomerContainer"), function name(params) {
+
+        function zoomOff() {
+            console.log("ZOOM OFF")
+            $(this).css({
+                '-webkit-mask-image': ''
+            });
+            $('.mag').hide();
+        }
+
+        function zoom(e) {
+            var mouseX = e.pageX - $(this).offset().left,
+                mouseY = e.pageY - $(this).offset().top,
+                w = $(this).width(),
+                h = $(this).height();
+            $('.small').css({
+                'background-position': (mouseX / w * 100) + '% ' + (mouseY / h * 100) + '%'
+            });
+            $(this).css({
+                '-webkit-mask-image': 'radial-gradient(circle 68px at ' + mouseX + 'px ' + mouseY + 'px, rgba(255,255,255,1) 90%, rgba(255,255,255,0) 100%)',
+                'cursor': 'none'
+            });
+            $('.mag').show().css({
+                'left': mouseX + 2,
+                'top': mouseY + 2
+            });
+
+        }
+
+        $(this).find(".small").on({
+            'mousemove': zoom,
+            'mouseleave': zoomOff
+        });
+    })
+
     // LSS QUIZ
 
     function pick_another_question(lss_database, current_question, title_container, choices_container) {
@@ -1031,7 +1069,7 @@ var refresh_objects_listeners = function () {
         return round_answers;
     }
 
-    $.each($(".lss_quiz"), function (index, element) {
+    $.each($(".lss_quiz"), function(index, element) {
         let raw_database = $(this).find("#database");
         let database_json = JSON.parse(raw_database[0].innerHTML);
         let lss_settings = database_json["settings"];
@@ -1092,7 +1130,7 @@ var refresh_objects_listeners = function () {
             $(choices_wrapper).append(new_choice_container);
             choices_container.push(answer_box);
 
-            $(input_answer).on("click", function () {
+            $(input_answer).on("click", function() {
                 if (!processing_next_round) {
                     console.log(game_box.offset().top - offset_top - margin_top)
                     console.log(game_box.offset().top)
@@ -1109,7 +1147,7 @@ var refresh_objects_listeners = function () {
                     score += round_answers[choice_number]["Score"];
                     current_question++;
 
-                    aps.get_aps("julia_responde").play().then(function () {
+                    aps.get_aps("julia_responde").play().then(function() {
                         $(question_box).show();
                         $(julia_waiting).show();
                         $(julia_responde).hide();
@@ -1150,7 +1188,3 @@ var refresh_objects_listeners = function () {
         $(raw_database).remove();
     });
 }
-
-
-
-
