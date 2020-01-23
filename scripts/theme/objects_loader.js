@@ -723,6 +723,10 @@ var refresh_objects_listeners = function() {
 
     // SPLIT LIST
     $.each($(".split-list"), function() {
+        let margin_top = $($(".card-header")[0]).height();
+        let offset_top = $(".navbar").height();
+        let current_tab = $(this);
+
         let button_set = $(this).find(".btn-ret").children();
         let text_set = $(this).find(".sl-txt");
         let current_active_button = $(button_set[0]);
@@ -738,9 +742,13 @@ var refresh_objects_listeners = function() {
                 current_active_text = $(text_set[index]);
                 current_active_button.addClass("active");
                 current_active_text.show();
+                change_scroll_position_by_top_object(current_tab, offset_top, 0);
             });
         });
     });
+
+
+
 
 
     // MATCHUP
