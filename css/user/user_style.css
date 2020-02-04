@@ -44,3 +44,27 @@ section {
   list-style: circle !important;
   margin-left: 20px;
 }
+
+/* NOVO */
+.color-light{
+  color: var(--THEME_COLOR_MODULE_ONE_LIGHT);
+}
+
+
+.modal-content {
+  position: fixed !important;
+  top: 10% !important;  
+  margin-left: auto !important;
+  margin-right: auto !important;
+  left: 0 !important;
+  right: 0 !important;
+  max-width: 500px !important;
+}
+.modal-body{
+  margin-top: 0 !important;
+}
+@media (max-width: 567px) {
+  .modal-content {
+    max-width: 290px !important;
+  }
+}
