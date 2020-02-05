@@ -83,6 +83,7 @@ header .navbar {
 	font-family: 'Roboto Slab', serif;
 	font-size: 18px;
 	text-align: center;
+	text-transform: uppercase;
 }
 
 a.capitulo-link {
