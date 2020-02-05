@@ -45,6 +45,12 @@ section {
   margin-left: 20px;
 }
 
+
+/* NOVO */
+.modulo_1 .tab-content p, .modulo_1 .tab-content ul, .modulo_1 .tab-content ol{
+  color: white;
+}
+
 /* NOVO */
 .color-light{
   color: var(--THEME_COLOR_MODULE_ONE_LIGHT);
