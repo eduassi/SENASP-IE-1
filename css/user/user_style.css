@@ -53,3 +53,7 @@ section {
 .align-text-center{
   text-align: center;
 }
+
+.color-light {
+  color: var(--THEME_COLOR_MODULE_ONE_LIGHT);
+}
