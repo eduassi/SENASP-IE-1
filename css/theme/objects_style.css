@@ -304,6 +304,7 @@
     background-repeat: no-repeat;
     border: none;
     margin-bottom: 30px;
+    
 }
 
 .citacao div {
@@ -316,6 +317,7 @@
 .citacao p {
     color: var(--THEME_COLOR_MODULE_ONE_STRONG) !important;
     margin-bottom: 0;
+    font-style: italic;
 }
 
 .box-destaque {
@@ -323,7 +325,7 @@
     height: auto;
     border-left: 8px solid var(--THEME_COLOR_MODULE_ONE_STRONG);
     border-right: 8px solid var(--THEME_COLOR_MODULE_ONE_STRONG);
-    background: #e3d6d6;
+    background: #e8ecee;
     padding: 25px 50px 25px 50px;
     margin-bottom: 30px;
 }
