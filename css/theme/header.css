@@ -81,8 +81,9 @@ header .navbar {
 /* NAVEGAÇÃO DOS CAPÍTULOS */
 .capitulos-header {
 	font-family: 'Roboto Slab', serif;
-	font-size: 18px;
+	font-size: 15px;
 	text-align: center;
+	text-transform: uppercase;
 }
 
 a.capitulo-link {
