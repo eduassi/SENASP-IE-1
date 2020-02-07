@@ -422,10 +422,20 @@ label:focus,
     box-shadow: none !important;
 }
 
+.handle:after {
+   
+    top: 60%;
+
+}
+
 
 /* // Dispositivos small (telefones em modo paisagem, com 576px ou mais) */
 
-@media (min-width: 576px) {}
+@media (max-width: 1199px) {
+    .handle:after {   
+        top: 90%;
+    }
+}
 
 @media screen and (max-width: 991px) {
     body {
