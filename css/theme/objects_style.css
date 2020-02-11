@@ -315,7 +315,7 @@
 }
 
 .citacao p {
-    color: var(--THEME_COLOR_MODULE_ONE_STRONG) !important;
+    color: #5f7b87 !important;
     margin-bottom: 0;
     font-style: italic;
 }
