@@ -57,3 +57,16 @@ section {
 .color-light {
   color: var(--THEME_COLOR_MODULE_ONE_LIGHT);
 }
+
+/* NOVO */
+.aos-rw{
+  position: relative;
+  width: 100%;
+}
+/* NOVO */
+.aos-pa{
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+}
