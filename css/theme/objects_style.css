@@ -281,7 +281,7 @@
 
 .especialista .caixa-destaque-title {
     color: var(--THEME_COLOR_MODULE_ONE);
-    width: 210px;
+    width: 280px;
 }
 
 .patch {
@@ -1797,7 +1797,7 @@ a.nav-link {
 .split-list .btn-ret div {
     width: 100%;
     height: 110px;
-    background: var(--THEME_COLOR_MODULE_ONE_STRONG);
+    background: var(--THEME_COLOR_MODULE_ONE_SUPER_LIGHT);
     border-radius: 6px;
     margin-top: 8px;
     margin-bottom: 8px;
