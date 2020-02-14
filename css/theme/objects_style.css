@@ -1481,6 +1481,11 @@ ul.sl-bullet li::before {
     color: white !important;
 }
 
+.nav-item>a {
+    background-color: #e8ecee !important;
+    border-color: white !important;
+}
+
 .nav-tabs {
     margin-bottom: 0 !important;
 }
