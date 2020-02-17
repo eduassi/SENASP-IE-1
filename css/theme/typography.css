@@ -322,7 +322,7 @@ figcaption {
 /*  H4  */
 .modulo_1 h4 {
   color: var(--THEME_COLOR_MODULE_ONE);
-  margin-top:80px;
+  margin-top:50px;
 }
 
 .modulo_2 h4 {
